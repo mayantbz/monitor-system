@@ -8,6 +8,8 @@ import { computed, ref, watch } from 'vue'
 import { ElConfigProvider } from 'element-plus'
 import { useLocaleStore } from '@/stores'
 import { elementPlusLocales, setDayjsLocale } from '@/locale'
+import { useThemeStore } from '@/stores/modules/theme'
+const themeStore = useThemeStore()
 
 const localeStore = useLocaleStore()
 
@@ -33,6 +35,7 @@ watch(
           {{ localeStore.localeLabel }} / {{ localeStore.locale === 'zh-cn' ? 'English' : '中文' }}
         </el-button>
       </header>
+      <el-button @click="themeStore.toggleTheme()"> 切换主题 </el-button>
       <main class="app-main">
         <h1>You did it!</h1>
         <p>
