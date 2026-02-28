@@ -5,8 +5,10 @@
  * 统一管理storage key、默认值等
  */
 export const STORAGE_KEYS = {
-  //语言偏好 storage key
-  LOCALE: 'app-locale'
+  //语言偏好、主题偏好 storage key
+  LOCALE: 'app-locale',
+  THEME: 'app-theme'
 } as const
 
 export const DEFAULT_LOCALE = 'zh-cn' as const
+export const DEFAULT_THEME = 'light' as const

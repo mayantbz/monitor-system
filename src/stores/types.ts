@@ -5,3 +5,4 @@
  */
 
 export type LocaleType = 'zh-cn' | 'en'
+export type ThemeMode = 'light' | 'dark'
