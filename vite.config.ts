@@ -1,20 +1,55 @@
-import { fileURLToPath, URL } from 'node:url'
+/*
+ * @Author: mayan
+ * @CreatedTime: 2026-03-03 16:44:57
+ * @LastEditTime: 2026-03-07 11:44:57
+ * @Description: vite配置文件
+ */
 
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
+
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vite.dev/config/
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    vueDevTools(),
+
+    process.env.NODE_ENV === 'development' && vueDevTools(),
+
+    // 自动导入 API
+    AutoImport({
+      imports: ['vue', 'vue-router', 'pinia'],
+
+      resolvers: [ElementPlusResolver()],
+
+      dts: 'src/auto-imports.d.ts',
+
+      eslintrc: {
+        enabled: true,
+        filepath: './.eslintrc-auto-import.json',
+        globalsPropValue: true,
+      },
+    }),
+
+    // 自动导入组件
+    Components({
+      resolvers: [ElementPlusResolver()],
+
+      dts: 'src/components.d.ts',
+    }),
   ],
+
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 })
