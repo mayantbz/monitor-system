@@ -1,7 +1,7 @@
 /*
  * @Author: mayan
  * @CreatedTime: 2026-03-03 16:44:57
- * @LastEditTime: 2026-03-07 11:44:57
+ * @LastEditTime: 2026-03-07 11:55:02
  * @Description: vite配置文件
  */
 
@@ -42,7 +42,7 @@ export default defineConfig({
     // 自动导入组件
     Components({
       resolvers: [ElementPlusResolver()],
-
+      dirs: [], // 不扫描本地组件
       dts: 'src/components.d.ts',
     }),
   ],
